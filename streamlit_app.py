@@ -8,8 +8,8 @@ import uuid
 import streamlit as st
 
 from langchain_community.vectorstores import AstraDB
-from langchain_openai import OpenAIEmbeddings
-from langchain_openai import ChatOpenAI
+from langchain_cohere import CohereEmbeddings
+from langchain_cohere import ChatCohere
 from langchain.memory import ConversationBufferWindowMemory
 from langchain.memory import AstraDBChatMessageHistory
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -215,15 +215,14 @@ Answer in {language}:"""
 
     return ChatPromptTemplate.from_messages([("system", template)])
 
-# Get the OpenAI Chat Model
+# Get the Cohere Chat Model
 def load_model():
     print(f"""load_model""")
-    # Get the OpenAI Chat Model
-    return ChatOpenAI(
+    # Get the Cohere Chat Model
+    return ChatCohere(
         temperature=0.3,
-        model='gpt-4-1106-preview',
+        model='command-r-plus-08-2024',
         streaming=True,
-        verbose=True
     )
 
 # Get the Retriever
@@ -345,7 +344,7 @@ lang_dict = load_localization(language)
 def load_embedding():
     print("load_embedding")
     # Get the OpenAI Embedding
-    return OpenAIEmbeddings()
+    return CohereEmbeddings(model="embed-english-v3.0")
 
 # Cache Vector Store for future runs
 @st.cache_resource(show_spinner=lang_dict['load_vectorstore'])

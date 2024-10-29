@@ -2,7 +2,7 @@
 streamlit
 ragstack-ai
 openai
-langchain-openai
+langchain-cohere
 tiktoken
 pypdf
 pandas
