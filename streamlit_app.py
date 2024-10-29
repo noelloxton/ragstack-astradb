@@ -223,6 +223,7 @@ def load_model():
         temperature=0.3,
         model='command-r-plus-08-2024',
         streaming=True,
+        cohere_api_key=st.secrets["COHERE_API_KEY"]
     )
 
 # Get the Retriever
@@ -344,7 +345,7 @@ lang_dict = load_localization(language)
 def load_embedding():
     print("load_embedding")
     # Get the OpenAI Embedding
-    return CohereEmbeddings(model="embed-english-v3.0")
+    return CohereEmbeddings(model="embed-english-v3.0", cohere_api_key=st.secrets["COHERE_API_KEY"])
 
 # Cache Vector Store for future runs
 @st.cache_resource(show_spinner=lang_dict['load_vectorstore'])
